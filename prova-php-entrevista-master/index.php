@@ -1,5 +1,6 @@
 <?php
 require_once 'controllers/UserController.php';
+require_once 'controllers/ColorController.php';
 
 $controller = $_GET['controller'] ?? 'user';
 $action = $_GET['action'] ?? 'list';
@@ -20,6 +21,27 @@ switch($controller) {
                 break;
             case 'delete':
                 $userController->delete($id);
+                break;
+            default:
+                echo "Ação inválida.";
+                break;
+        }
+        break;
+   
+    case 'color':
+        $colorController = new ColorController();
+        switch($action) {
+            case 'list':
+                $colorController->list();
+                break;
+            case 'form':
+                $colorController->form($id);
+                break;
+            case 'save':
+                $colorController->save($_POST);
+                break;
+            case 'delete':
+                $colorController->delete($id);
                 break;
             default:
                 echo "Ação inválida.";

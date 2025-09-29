@@ -17,6 +17,7 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Email</th>
+                <th>Cores</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -27,6 +28,7 @@
                     <td><?= $user['id'] ?></td>
                     <td><?= htmlspecialchars($user['name']) ?></td>
                     <td><?= htmlspecialchars($user['email']) ?></td>
+                    <td><?= !empty($user['colors']) ? $user['colors'] : '-' ?></td>
                     <td>
                         <a href="index.php?controller=user&action=form&id=<?= $user['id'] ?>" class="btn btn-sm btn-warning">Editar</a>
                         <a href="index.php?controller=user&action=delete&id=<?= $user['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Deseja realmente excluir?')">Excluir</a>

@@ -23,6 +23,17 @@
             <label for="email" class="form-label">Email</label>
             <input type="email" name="email" id="email" class="form-control" required value="<?= $user['email'] ?? '' ?>">
         </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Cores</label><br>
+            <?php foreach($colors as $color): ?>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="colors[]" value="<?= $color['id'] ?>"
+                    <?= in_array($color['id'], $userColors) ? 'checked' : '' ?>>
+                    <label class="form-check-label"><?= htmlspecialchars($color['name']) ?></label>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
         <button type="submit" class="btn btn-success">Salvar</button>
         <a href="index.php?controller=user&action=list" class="btn btn-secondary">Cancelar</a>

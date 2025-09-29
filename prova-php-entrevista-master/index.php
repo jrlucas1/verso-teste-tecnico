@@ -1,34 +1,33 @@
 <?php
+require_once 'controllers/UserController.php';
 
-require 'connection.php';
+$controller = $_GET['controller'] ?? 'user';
+$action = $_GET['action'] ?? 'list';
+$id = $_GET['id'] ?? null;
 
-$connection = new Connection();
+switch($controller) {
+    case 'user':
+        $userController = new UserController();
+        switch($action) {
+            case 'list':
+                $userController->list();
+                break;
+            case 'form':
+                $userController->form($id);
+                break;
+            case 'save':
+                $userController->save($_POST);
+                break;
+            case 'delete':
+                $userController->delete($id);
+                break;
+            default:
+                echo "Ação inválida.";
+                break;
+        }
+        break;
 
-$users = $connection->query("SELECT * FROM users");
-
-echo "<table border='1'>
-
-    <tr>
-        <th>ID</th>    
-        <th>Nome</th>    
-        <th>Email</th>
-        <th>Ação</th>    
-    </tr>
-";
-
-foreach($users as $user) {
-
-    echo sprintf("<tr>
-                      <td>%s</td>
-                      <td>%s</td>
-                      <td>%s</td>
-                      <td>
-                           <a href='#'>Editar</a>
-                           <a href='#'>Excluir</a>
-                      </td>
-                   </tr>",
-        $user->id, $user->name, $user->email);
-
+    default:
+        echo "Controller inválido.";
+        break;
 }
-
-echo "</table>";

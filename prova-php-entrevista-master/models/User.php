@@ -9,7 +9,12 @@ class User {
     }
 
     public function getAll() {
-        $stmt = $this->pdo->query("SELECT * FROM users");
+        $stmt = $this->pdo->query("SELECT u.*, GROUP_CONCAT(c.name, ', ') as colors
+                                    FROM users u
+                                    LEFT JOIN user_colors uc ON u.id = uc.user_id
+                                    LEFT JOIN colors c ON c.id = uc.color_id
+                                    GROUP BY u.id
+                                    ORDER BY u.id ASC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -35,5 +40,17 @@ class User {
     public function delete($id) {
         $stmt = $this->pdo->prepare("DELETE FROM users WHERE id = ?");
         $stmt->execute([$id]);
+        $this->syncColors($id, []);
+    }
+
+    private function syncColors($userId, $colors) {
+        $stmt = $this->pdo->prepare("DELETE FROM user_colors WHERE user_id = ?");
+        $stmt->execute([$userId]);
+        if (!empty($colors)) {
+            $stmt = $this->pdo->prepare("INSERT INTO user_colors (user_id, color_id) VALUES (?, ?)");
+            foreach ($colors as $colorId) {
+                $stmt->execute([$userId, $colorId]);
+            }
+        }
     }
 }

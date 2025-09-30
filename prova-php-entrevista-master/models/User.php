@@ -34,6 +34,7 @@ class User {
         $stmt = $this->pdo->prepare("INSERT INTO users (name, email) VALUES (?, ?)");
         $stmt->execute([$name, $email]);
         $userId = $this->pdo->lastInsertId();
+        $this->syncColors($userId, $colors);
         return $userId;
     }
 

@@ -14,7 +14,6 @@
         <input type="hidden" name="id" value="<?= $user['id'] ?>">
       <?php endif; ?>
 
-      <!-- Nome -->
       <div>
         <label for="name" class="block text-sm font-medium text-slate-700 mb-2">Nome</label>
         <input type="text" name="name" id="name" required
@@ -22,7 +21,6 @@
                class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
       </div>
 
-      <!-- Email -->
       <div>
         <label for="email" class="block text-sm font-medium text-slate-700 mb-2">Email</label>
         <input type="email" name="email" id="email" required

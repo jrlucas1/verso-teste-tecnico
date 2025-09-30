@@ -22,7 +22,6 @@ $currentController = $_GET['controller'] ?? '';
         <?php endforeach; ?>
       </div>
 
-      <!-- Hamburger mobile -->
       <div class="md:hidden flex items-center">
         <button id="mobile-menu-button" class="text-slate-700 focus:outline-none">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +34,6 @@ $currentController = $_GET['controller'] ?? '';
     </div>
   </div>
 
-  <!-- Menu mobile -->
   <div id="mobile-menu" class="md:hidden hidden px-4 pt-2 pb-4 space-y-1">
     <?php foreach($navItems as $item): ?>
       <a href="<?= $item['link'] ?>"
@@ -47,7 +45,7 @@ $currentController = $_GET['controller'] ?? '';
 </nav>
 
 <script>
-const btn = document.getElementById('mobile-menu-button');
-const menu = document.getElementById('mobile-menu');
-btn.addEventListener('click', () => { menu.classList.toggle('hidden'); });
+  const btn = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => { menu.classList.toggle('hidden'); });
 </script>

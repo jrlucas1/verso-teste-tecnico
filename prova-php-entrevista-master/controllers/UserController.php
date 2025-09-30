@@ -30,7 +30,7 @@ class UserController {
         if($id) {
             $this->userModel->update($id, $data['name'], $data['email'], $data['colors']);
         } else {
-            $this->userModel->create($data['name'], $data['email']);
+            $this->userModel->create($data['name'], $data['email'], $data['colors']);
         }
 
         header("Location: index.php?controller=user&action=list");
